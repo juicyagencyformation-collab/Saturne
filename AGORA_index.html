@@ -1761,8 +1761,9 @@ body{background:var(--blanc);font-family:'DM Sans',sans-serif;-webkit-font-smoot
 // ══════════════════════════════════════════════
 //  SUPABASE
 // ══════════════════════════════════════════════
-const SUPABASE_URL = 'https://zrdxutgoxtpmeymgkeqy.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyZHh1dGdveHRwbWV5bWdrZXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4ODU4NjQsImV4cCI6MjA5MjQ2MTg2NH0.eBOTQFIgCf6z-ax3H15bTXfnvVKJsZEeBNyphQUKL5g';
+const SUPABASE_URL = 'https://jofeldziwqdswfhqqrcv.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvZmVsZHppd3Fkc3dmaHFxcmN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NTQ0NzMsImV4cCI6MjA4OTMzMDQ3M30.PqkaS0TdQ_4wiZSX2lJuaPHr1zFyd9jovt9Ucd8IhQc
+';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ── MULTI-COMMUNES · Phase 2 — détection automatique par URL ──
@@ -1778,7 +1779,7 @@ async function initCommune() {
   // 1. Détection du slug
   const params = new URLSearchParams(window.location.search);
   const pathSlug = window.location.pathname.split('/').filter(Boolean)[0];
-  const slug = params.get('commune') || pathSlug || 'eaucourt';
+  const slug = params.get('commune') || pathSlug || 'Saturne';
   COMMUNE_SLUG = slug;
 
   // 2. Charger la commune depuis Supabase
@@ -1786,7 +1787,7 @@ async function initCommune() {
     .select('*').eq('slug', slug).eq('actif', true).single();
 
   if (error || !data) {
-    console.warn('[Commune] Slug introuvable :', slug, '— fallback Eaucourt');
+    console.warn('[Commune] Slug introuvable :', slug, '— fallback Saturne');
     // Fallback : charger par id=1
     const { data: fallback } = await sb.from('communes').select('*').eq('id', 1).single();
     if (fallback) { applyCommune(fallback); return; }
